@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import { useDispatch } from 'react-redux';
 
 import Card from '../UI/Card';
 import './ProductItem.css';
