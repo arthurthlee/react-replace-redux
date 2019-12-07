@@ -2,10 +2,20 @@ import {useState, useEffect} from 'react';
 
 let globalState = {};
 let listeners = [];
+// actions = kvp of action name, function
 let actions = {};
 
-const useStore = () => {
+export const useStore = () => {
     const setState = useState(globalState)[1];
+
+    const dispatch = actionIdentifier => {
+        const newState = actions[actionIdentifier](globalState);
+        globalState = {...globalState, ...newState};
+
+        for (const listener of listeners) {
+            listener(globalState);
+        };
+    };
 
     // Gets called whenever a component that uses this hook updates
     useEffect(() => {
@@ -19,5 +29,12 @@ const useStore = () => {
         };
     }, [setState]);
 
-
+    return [globalState, dispatch]
 };
+
+export const initStore = (userActions, initialState) => {
+    if (intialState) {
+        globalState = {...globalState, ...initialState}
+    }
+    actions = {...actions, ...userActions};
+}
