@@ -5,6 +5,8 @@ let listeners = [];
 // actions = kvp of action name, function
 let actions = {};
 
+
+// This useStore can now be used to get the current state ([0]) or dispatch an action ([1])
 export const useStore = () => {
     const setState = useState(globalState)[1];
 
@@ -32,6 +34,8 @@ export const useStore = () => {
     return [globalState, dispatch]
 };
 
+// When initStore is called in a store such as product-store, product-store can merge actions and the initialState
+// with whatever is currently in the global state
 export const initStore = (userActions, initialState) => {
     if (initialState) {
         globalState = {...globalState, ...initialState}
