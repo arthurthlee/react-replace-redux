@@ -34,7 +34,7 @@ export const ProductsContext = React.createContext({
       const toggleFavourite = (productId) => {
         setProductsList(currentProdList => {
 
-            return updatedProducts;
+            //return updatedProducts;
         });
       };
 
